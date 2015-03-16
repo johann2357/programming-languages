@@ -5,7 +5,7 @@
 ###
 
 
-from datetime import datetime
+from datetime import time
 
 
 def get_times(p):
@@ -16,8 +16,8 @@ def get_times(p):
         from_ = pair[0].split(':')
         to_ = pair[1].split(':')
         result.append((
-            datetime(2015, 1, 1, int(from_[0]), int(from_[1]), 0),
-            datetime(2015, 1, 1, int(to_[0]), int(to_[1]), 0),
+            time(int(from_[0]), int(from_[1])),
+            time(int(to_[0]), int(to_[1])),
         ))
     return result
 
