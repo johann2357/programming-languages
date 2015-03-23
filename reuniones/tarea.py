@@ -31,6 +31,23 @@ def read_file(f):
     return d
 
 
+def get_schedule(range, time):
+    start = range[0][0]
+    finish = range[0][1]
+    new_schedule = []
+    new_time = ()
+    for from_, to_ in range[1:]:
+        time_free = finish - from_
+        finish = from_
+        if time_free >= time:
+            new_time = (start, to_)
+            new_schedule.append(new_time)
+            start = from_
+        else:
+            start = from_
+    return new_schedule
+
+
 def main():
     s = raw_input('ingrese parametros:')
     p = s.split()
@@ -42,10 +59,10 @@ def main():
     for x in schedules:
         for k, v in x.iteritems():
             print k, ' ---> ',
+            v = get_schedule(v, reunion)
             for from_, to_ in v:
                 print ' %d:%d-' % (from_.hour, from_.minute),
                 print '%d:%d ' % (to_.hour, to_.minute),
-            print
 
 
 main()
