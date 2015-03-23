@@ -5,7 +5,7 @@
 ###
 
 
-from datetime import time
+from datetime import time, datetime, date, timedelta
 
 
 def get_times(p):
@@ -31,15 +31,20 @@ def read_file(f):
     return d
 
 
-def get_schedule(range, time):
-    start = range[0][0]
-    finish = range[0][1]
+def get_schedule(range_, time_):
+    start = range_[0][0]
+    finish = range_[0][1]
     new_schedule = []
     new_time = ()
-    for from_, to_ in range[1:]:
-        time_free = finish - from_
+    for from_, to_ in range_[1:]:
+        time_free = (
+            datetime.combine(
+                date.today(),
+                finish
+            ) - datetime.combine(date.today(), from_)
+        )
         finish = from_
-        if time_free >= time:
+        if time_free >= time_:
             new_time = (start, to_)
             new_schedule.append(new_time)
             start = from_
@@ -55,7 +60,7 @@ def main():
     schedules = []
     for f in p[1:]:
         schedules.append(read_file(f))
-    print reunion
+    reunion = timedelta(hours=int(reunion[0]), minutes=int(reunion[1]))
     for x in schedules:
         for k, v in x.iteritems():
             print k, ' ---> ',
