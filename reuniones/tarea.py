@@ -5,11 +5,25 @@
 ###
 
 
+from pprint import pprint
 from datetime import time, datetime, date, timedelta
+
+days = [
+    'mon',
+    'tue',
+    'wed',
+    'thu',
+    'fri',
+    'sat',
+    'sun',
+]
 
 
 def get_times(p):
-    # [(desde, hasta), (desde, hasta), ....]
+    """
+        Get the times in the following format
+        [(desde, hasta), (desde, hasta), ....]
+    """
     result = []
     for pair in p:
         pair = pair.split('-')
@@ -23,6 +37,10 @@ def get_times(p):
 
 
 def read_file(f):
+    """
+        Just open the file and get the respective dict
+        { 'day' : [(desde, hasta), (desde, hasta), ....] }
+    """
     d = {}
     with open(f) as schedule:
         for line in schedule:
@@ -32,6 +50,9 @@ def read_file(f):
 
 
 def get_schedule(range_, time_):
+    # FIXME: this function should determine the schedule considering how long
+    #        the reunion should be
+    return
     start = range_[0][0]
     finish = range_[0][1]
     new_schedule = []
@@ -53,6 +74,39 @@ def get_schedule(range_, time_):
     return new_schedule
 
 
+def print_schedule(final_schedule):
+    """
+        It should print the result with the format as follow:
+         > mon 14:35-16:00 17:10-17:58
+         > tue 13:31-15:13
+    """
+    pass
+
+
+def merge_schedules(schedules):
+    """
+        Function that get the merged schedule of availability
+        Returns a dict with the respectives days and a list of tuples
+        of the beginning end time of the period
+    """
+    day_availability = dict()
+    for d in days:
+        day_schedule = []
+        for sch in schedules:
+            day_schedule.append(sch.get(d, []))
+
+        day_availability[d] = []
+        for pivot in day_schedule[0]:
+            for p in day_schedule[1:]:
+                for tp in p:
+                    if pivot[1] > tp[0]:
+                        beginning = max(pivot[0], tp[0])
+                        end = min(pivot[1], tp[1])
+                        if beginning < end:
+                            day_availability[d].append((beginning, end))
+    return day_availability
+
+
 def main():
     s = raw_input('ingrese parametros:')
     p = s.split()
@@ -61,13 +115,24 @@ def main():
     for f in p[1:]:
         schedules.append(read_file(f))
     reunion = timedelta(hours=int(reunion[0]), minutes=int(reunion[1]))
-    for x in schedules:
-        for k, v in x.iteritems():
-            print k, ' ---> ',
-            v = get_schedule(v, reunion)
-            for from_, to_ in v:
-                print ' %d:%d-' % (from_.hour, from_.minute),
-                print '%d:%d ' % (to_.hour, to_.minute),
+    general_schedule = merge_schedules(schedules)
+    # TODO: delete this print and test all the possible cases
+    pprint(general_schedule)
+    # TODO: make this work
+    print_schedule(
+        get_schedule(general_schedule, reunion)
+    )
+
+    return
+
+    # FIXME: this still could be useful if not please deleted
+    # for x in schedules:
+    #     for k, v in x.iteritems():
+    #         print k, ' ---> ',
+    #         v = get_schedule(v, reunion)
+    #         for from_, to_ in v:
+    #             print ' %d:%d-' % (from_.hour, from_.minute),
+    #             print '%d:%d ' % (to_.hour, to_.minute),
 
 
 main()
