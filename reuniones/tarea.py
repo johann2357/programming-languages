@@ -5,7 +5,6 @@
 ###
 
 
-from pprint import pprint
 from datetime import time, datetime, date, timedelta
 
 days = [
@@ -49,29 +48,22 @@ def read_file(file):
     return d
 
 
-def get_schedule(range_, time_):
-    # FIXME: this function should determine the schedule considering how long
-    #        the reunion should be
-    return
-    start = range_[0][0]
-    finish = range_[0][1]
-    new_schedule = []
-    new_time = ()
-    for from_, to_ in range_[1:]:
-        time_free = (
-            datetime.combine(
-                date.today(),
-                finish
-            ) - datetime.combine(date.today(), from_)
-        )
-        finish = from_
-        if time_free >= time_:
-            new_time = (start, to_)
-            new_schedule.append(new_time)
-            start = from_
-        else:
-            start = from_
-    return new_schedule
+def get_schedule(free_sched, time_):
+    result = dict()
+    for day, sched in free_sched.iteritems():
+        if sched:
+            for beg, end in sched:
+                time_free = (
+                    datetime.combine(
+                        date.today(),
+                        end
+                    ) - datetime.combine(date.today(), beg)
+                )
+                if time_free >= time_:
+                    if result.get(day) is None:
+                        result[day] = []
+                    result[day].append((beg, end))
+    return result
 
 
 def print_schedule(final_schedule):
@@ -80,7 +72,14 @@ def print_schedule(final_schedule):
          > mon 14:35-16:00 17:10-17:58
          > tue 13:31-15:13
     """
-    pass
+    for day, sched in final_schedule.iteritems():
+        print '%s' % day,
+        for beg, end in sched:
+            print ' %i:%i-%i:%i' % (
+                beg.hour, beg.minute,
+                end.hour, end.minute,
+            ),
+        print
 
 
 def merge_schedules(schedules):
@@ -94,28 +93,29 @@ def merge_schedules(schedules):
         day_schedule = []
         for sch in schedules:
             day_schedule.append(sch.get(d, []))
-        print d, day_schedule
+
         day_availability[d] = []
 
         # start_hour is the hour of start
         # of the first schedule in the first day of the week
-        start_hour = day_schedule[0][0][0].hour
-        for f_fil in day_schedule:
-            for f_col in f_fil:
-                for f_s, f_f in f_col:
-                    for fil in day_schedule:
-                        for col in fil:
-                            for s, f in col:
-                                if start_hour>s:
+        # start_hour = day_schedule[0][0][0].hour
+        # for f_fil in day_schedule:
+        #     for f_col in f_fil:
+        #         for f_s, f_f in f_col:
+        #             for fil in day_schedule:
+        #                 for col in fil:
+        #                     for s, f in col:
+        #                         if start_hour > s:
+        #                             pass
 
-        # for pivot in day_schedule[0]:
-        #     for p in day_schedule[1:]:
-        #         for tp in p:
-        #             if pivot[1] > tp[0]:
-        #                 beginning = max(pivot[0], tp[0])
-        #                 end = min(pivot[1], tp[1])
-        #                 if beginning < end:
-        #                     day_availability[d].append((beginning, end))
+        for pivot in day_schedule[0]:
+            for p in day_schedule[1:]:
+                for tp in p:
+                    if pivot[1] > tp[0]:
+                        beginning = max(pivot[0], tp[0])
+                        end = min(pivot[1], tp[1])
+                        if beginning < end:
+                            day_availability[d].append((beginning, end))
     return day_availability
 
 
@@ -129,11 +129,10 @@ def main():
     reunion = timedelta(hours=int(reunion[0]), minutes=int(reunion[1]))
     general_schedule = merge_schedules(schedules)
     # # TODO: delete this print and test all the possible cases
-    # pprint(general_schedule)
     # # TODO: make this work
-    # print_schedule(
-    #     get_schedule(general_schedule, reunion)
-    # )
+    print_schedule(
+        get_schedule(general_schedule, reunion)
+    )
 
     return
 
