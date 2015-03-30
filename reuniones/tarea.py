@@ -36,13 +36,13 @@ def get_times(p):
     return result
 
 
-def read_file(f):
+def read_file(file):
     """
         Just open the file and get the respective dict
         { 'day' : [(desde, hasta), (desde, hasta), ....] }
     """
     d = {}
-    with open(f) as schedule:
+    with open(file) as schedule:
         for line in schedule:
             day = line.split()
             d[day[0]] = get_times(day[1:])
@@ -94,16 +94,28 @@ def merge_schedules(schedules):
         day_schedule = []
         for sch in schedules:
             day_schedule.append(sch.get(d, []))
-
+        print d, day_schedule
         day_availability[d] = []
-        for pivot in day_schedule[0]:
-            for p in day_schedule[1:]:
-                for tp in p:
-                    if pivot[1] > tp[0]:
-                        beginning = max(pivot[0], tp[0])
-                        end = min(pivot[1], tp[1])
-                        if beginning < end:
-                            day_availability[d].append((beginning, end))
+
+        # start_hour is the hour of start
+        # of the first schedule in the first day of the week
+        start_hour = day_schedule[0][0][0].hour
+        for f_fil in day_schedule:
+            for f_col in f_fil:
+                for f_s, f_f in f_col:
+                    for fil in day_schedule:
+                        for col in fil:
+                            for s, f in col:
+                                if start_hour>s:
+
+        # for pivot in day_schedule[0]:
+        #     for p in day_schedule[1:]:
+        #         for tp in p:
+        #             if pivot[1] > tp[0]:
+        #                 beginning = max(pivot[0], tp[0])
+        #                 end = min(pivot[1], tp[1])
+        #                 if beginning < end:
+        #                     day_availability[d].append((beginning, end))
     return day_availability
 
 
@@ -116,12 +128,12 @@ def main():
         schedules.append(read_file(f))
     reunion = timedelta(hours=int(reunion[0]), minutes=int(reunion[1]))
     general_schedule = merge_schedules(schedules)
-    # TODO: delete this print and test all the possible cases
-    pprint(general_schedule)
-    # TODO: make this work
-    print_schedule(
-        get_schedule(general_schedule, reunion)
-    )
+    # # TODO: delete this print and test all the possible cases
+    # pprint(general_schedule)
+    # # TODO: make this work
+    # print_schedule(
+    #     get_schedule(general_schedule, reunion)
+    # )
 
     return
 
