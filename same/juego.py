@@ -151,6 +151,8 @@ class SameGame(object):
         """
             path = [((x, y), board), ((x, y), board), ... ]
         """
+        if self.SOLVED:
+            return
         if self.is_done(board):
             self.print_path(path)
             self.SOLVED = True
