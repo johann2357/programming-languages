@@ -42,7 +42,7 @@ class SameGame(object):
         print "\n==== SOLUTION ===="
         for position,  board in path:
             print
-            print position[0], position[1]
+            print (len(self.DATA)-1)-position[0], position[1]
             print
             self.print_board(board)
 
