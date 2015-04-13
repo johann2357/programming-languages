@@ -166,6 +166,8 @@ class SameGame(object):
                 board=new_board,
                 path=path + [((new_x, new_y), new_board)]
             )
+        if len(path) is 0 and self.SOLVED is False:
+            print 'El Tablero no tiene solucion'
 
 
 def main():
