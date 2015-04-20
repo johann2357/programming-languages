@@ -11,7 +11,7 @@ public class Lotery {
 		s = in.nextLine();
 
 		ChooserUtils utils = new ChooserUtils();
-		ArrayList<String> lottery = utils.get_lotery_options();
+		ArrayList<String> lottery = utils.get_lotery_options(s);
 		ParserUtils parser = new ParserUtils();
 		ArrayList<String> bets = parser.parse_file(lottery.get(0));
 		for (String bet : bets) {
