@@ -13,7 +13,13 @@ public class Lotery {
 		ChooserUtils utils = new ChooserUtils();
 		ArrayList<String> lottery = utils.get_lotery_options();
 		ParserUtils parser = new ParserUtils();
-		parser.parse_file(lottery.get(0));
-		parser.parse_file(lottery.get(1));
+		ArrayList<String> bets = parser.parse_file(lottery.get(0));
+		for (String bet : bets) {
+			System.out.println(bet);
+		}
+		ArrayList<String> result = parser.parse_file(lottery.get(1));
+		for (String r : result) {
+			System.out.println(r);
+		}
 	}
 }
