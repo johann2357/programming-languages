@@ -18,6 +18,7 @@ public class Quina implements LoteryInterface {
 
     public void parse_bets(ArrayList<String> bs) {
         for (String s : bs) {
+            // FIXME: throws a NullPointerException ... WAT
             bets.add(s.split(" "));
         }
         get_amounts();
