@@ -77,8 +77,8 @@ La ejecución del programa con los parámetros lotogol ejemplo-lotogol, debería im
 6.50
 1.74
 1º (5 acertos) 2 0.35
-2º (4 acertos) 3 0.17
-3º (3 acertos) 4 0.13
+2º (4 acertos) 2 0.17
+3º (3 acertos) 2 0.13
 
 Esto significa que el acumulado total fue de S/. 6.50 y la cantidad asignada para premios fue de S/. 1.74. Dos apuestas acertaron 5 resultados y cada uno ganó por S/. 0.35. Tres apuestas acertaron 4 resultados, ganando S/. 0.17. Cuatro apuestas acertaron 3 resultados y cada uno ganó S/. 0.13.
 
