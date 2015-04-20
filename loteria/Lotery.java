@@ -18,11 +18,5 @@ public class Lotery {
 		Quina game = new Quina();
 		game.parse_bets(bets);
 		game.parse_result(result);
-		for (String bet : bets) {
-			System.out.println(bet);
-		}
-		for (String r : result) {
-			System.out.println(r);
-		}
 	}
 }
