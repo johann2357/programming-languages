@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Lotery {
@@ -13,10 +14,10 @@ public class Lotery {
 		ChooserUtils utils = new ChooserUtils();
 		ArrayList<String> lottery = utils.get_lotery_options(s);
 		ParserUtils parser = new ParserUtils();
-		ArrayList<String> bets = parser.parse_file(lottery.get(0));
-		ArrayList<String> result = parser.parse_file(lottery.get(1));
+		List<List<String>> bets = parser.parse_bets(lottery.get(0));
+		List<String> result = parser.parse_result(lottery.get(1));
 		Quina game = new Quina();
-		game.parse_bets(bets);
-		game.parse_result(result);
+		game.set_bets(bets);
+		game.set_result(result);
 	}
 }

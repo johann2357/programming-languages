@@ -3,12 +3,14 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 
 public class ParserUtils {
 	
-	public ArrayList<String> parse_file(String filename) {
-		ArrayList<String> parsed_data = new ArrayList<String>();
+	private List<String> parse_file(String filename) {
+		List<String> parsed_data = new ArrayList<String>();
 		// Construct BufferedReader from FileReader
 		BufferedReader br = null;
 		try {
@@ -35,5 +37,18 @@ public class ParserUtils {
 			e.printStackTrace();
 		}
 		return parsed_data;
+	}
+
+	public List<List<String>> parse_bets(String filename) {
+		List<String> bets = parse_file(filename);
+		List<List<String>> result = new ArrayList<>();
+		for (String bet : bets) {
+				result.add(Arrays.asList(bet.split("\\s+")));
+		}
+		return result;
+	}
+	public List<String> parse_result(String filename) {
+		List<String> res = parse_file(filename);
+		return Arrays.asList(res.get(0).split("\\s+"));
 	}
 }

@@ -1,8 +1,12 @@
 import java.util.ArrayList;
+import java.util.List;
 
 public interface LoteryInterface {
 
-	public void parse_bets(ArrayList<String> bets);
-	public void parse_result(ArrayList<String> result);
+	List<List<String>> bets = null;
+	List<String> result = null;
+
+	public void set_bets(List<List<String>> bs);
+	public void set_result(List<String> r);
 
 }

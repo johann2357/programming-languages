@@ -1,9 +1,10 @@
 import java.util.ArrayList;
+import java.util.List;
 
 public class Quina implements LoteryInterface {
 
-    ArrayList<String[]> bets;
-    String[] result;
+    List<List<String>> bets = null;
+    List<String> result = null;
     float[] prices = {0.75f, 3.0f, 7.5f};
     float[] partitions = {0.25f, 0.25f, 0.35f};
     float[] partitions_amount;
@@ -16,19 +17,14 @@ public class Quina implements LoteryInterface {
     private void get_results() {
     }
 
-    public void parse_bets(ArrayList<String> bs) {
-        for (String s : bs) {
-            // FIXME: throws a NullPointerException ... WAT
-            bets.add(s.split(" "));
-        }
-        get_amounts();
+    public void set_bets(List<List<String>> bs) {
+        bets = bs;
         return;
     }
 
 
-    public void parse_result(ArrayList<String> r) {
-        result = r.get(0).split(" ");
-        get_results();
+    public void set_result(List<String> r) {
+        result = r;
         return;
     }
 }
