@@ -9,4 +9,5 @@ public interface LoteryInterface {
 	public void set_bets(List<List<String>> bs);
 	public void set_result(List<String> r);
 
+	void print_game();
 }

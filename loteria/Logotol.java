@@ -1,38 +1,37 @@
 import java.util.Arrays;
 import java.util.List;
 
-public class Quina implements LoteryInterface {
+public class Logotol implements LoteryInterface{
 
     List<List<String>> bets = null;
     List<String> result = null;
-    List<Float> prices = Arrays.asList(0.75f, 3.0f, 7.5f);
-    List<Float> partitions = Arrays.asList(0.25f, 0.25f, 0.35f);
-    List<String> partitions_name = Arrays.asList("Terno", "Quadra", "Quina");
+    List<Float> prices = Arrays.asList(0.5f, 1.0f, 2.0f);
+    List<Float> partitions = Arrays.asList(0.3f, 0.3f, 0.4f);
+    List<String> partitions_name = Arrays.asList("1º (5 acertos)", "2º (4 acertos)", "1º (5 acertos)");
     List<Integer> partitions_count = Arrays.asList(0, 0, 0);
-    Float total_per = 104.5f;
-    Float total_prices_per = 32.2f;
+    Float total_per = 104.4f;
+    Float total_prices_per = 28.0f;
     Float total_amount = 0f;
     Float total_prices_amount = 0f;
 
     private void get_amounts() {
         for (List<String> p : bets) {
-            total_amount += prices.get(p.size() - 5);
+            total_amount += prices.get(Integer.parseInt(p.get(0)) / 2);
         }
         total_prices_amount = total_amount * total_per / 100;
         total_prices_amount = total_prices_amount * total_prices_per / 100;
     }
 
     private void get_results() {
-        for (List<String> bet : bets) {
+        for (int i = 1; i < bets.size() ; i++) {
             int count = 0;
-            for (String n : bet) {
-                if (result.contains(n)) {
+            for (int j = 1; i < bets.get(i).size() ;) {
+                if (result.get(j) == bets.get(i).get(j - 1)) {
                     count++;
                 }
+                j += 3;
             }
-            if (count > 2) {
-                partitions_count.set(count - 3, (partitions_count.get(count - 3) + 1));
-            }
+            partitions_count.set(count - 3, (partitions_count.get(count - 3) + 1));
         }
     }
 
