@@ -1,0 +1,6 @@
+Write a program that does matrix multiplication in some language that
+does subscript range checking and for which you can obtain an assembly
+language or machine language version from the compiler. Determine
+the number of instructions required for the subscript range checking and
+compare it with the total number of instructions for the matrix multipli-
+cation process.

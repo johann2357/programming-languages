@@ -1,0 +1,13 @@
+Write a Perl program that uses a hash and a large number of operations
+on the hash. For example, the hash could store people’s names and their
+ages. A random-number generator could be used to create three-character
+names and ages, which could be added to the hash. When a duplicate
+name was generated, it would cause an access to the hash but not add a
+new element. Rewrite the same program without using hashes. Compare
+the execution efficiency of the two. Compare the ease of programming
+and readability of the two.
+
+$ perl hash.pl 
+It took: 0.01 seconds
+$ perl nohash.pl 
+It took: 1.75 seconds

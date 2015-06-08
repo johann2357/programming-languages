@@ -1,0 +1,5 @@
+Write a program in C++ or C# that includes two different enumeration
+types and has a significant number of operations using the enumeration
+types. Also write the same program using only integer variables. Com-
+pare the readability and predict the reliability differences between the
+two programs.

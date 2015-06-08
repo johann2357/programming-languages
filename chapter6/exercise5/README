@@ -1,0 +1,5 @@
+Write a simple program in C++ to investigate the safety of its enumera-
+tion types. Include at least 10 different operations on enumeration types
+to determine what incorrect or just silly things are legal. Now, write a C#
+program that does the same things and run it to determine how many of
+the incorrect or silly things are legal. Compare your results.

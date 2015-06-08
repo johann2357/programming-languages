@@ -1,0 +1,4 @@
+If you have access to a compiler in which the user can specify whether
+subscript range checking is desired, write a program that does a large
+number of matrix accesses and time their execution. Run the program
+with subscript range checking and without it, and compare the times.

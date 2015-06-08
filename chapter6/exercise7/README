@@ -1,0 +1,6 @@
+Write a C program that does a large number of references to elements
+of two-dimensioned arrays, using only subscripting. Write a second
+program that does the same operations but uses pointers and pointer
+arithmetic for the storage-mapping function to do the array references.
+Compare the time efficiency of the two programs. Which of the two
+programs is likely to be more reliable? Why?
