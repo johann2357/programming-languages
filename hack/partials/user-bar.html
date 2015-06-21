@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse"
+      data-target=".navbar-collapse">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="#/feed">Simple Twitter</a>
+  </div>
+  <div class="navbar-collapse collapse">
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="#/feed">Home</a></li>
+      <li><a href="#/login">Log In</a></li>
+      <li><a href="#/signup">Sign Up</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="#/tweet">Tweet</a></li>
+      <!-- if usr.is_authenticated -->
+      <li class="dropdown">
+        <a href="" class="dropdown-toggle"
+          data-toggle="dropdown">Johann<b class="caret"></b></a>
+        <ul class="dropdown-menu">
+          <li><a href="#/user-info">My Tweets</a></li>
+          <li class="divider"></li>
+          <li><a href="#/logut">Log Out</a></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>

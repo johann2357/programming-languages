@@ -1,0 +1,21 @@
+<ul class="list-unstyled">
+  <li ng-repeat="tweet in tweets">
+    <div class="row">
+      <div class="col-md-offset-2 col-md-2">
+        <div class="row">
+          <a href="#/user-info">{{ tweet.user_id }}</a>
+        </div>
+        <div class="col-md-12">
+          <p>{{ tweet.created }}</p>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="row tweet">
+          <p>{{ tweet.data }}</p>
+          <ul class="list-inline">{ tweet.image }</ul>
+        </div>
+      </div>
+    </div>
+    <hr>
+  </li>
+</ul>

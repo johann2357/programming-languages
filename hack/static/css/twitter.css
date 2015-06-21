@@ -1,0 +1,31 @@
+body {
+  min-height: 360px;
+  padding-top: 70px;
+  background-color: #eee;
+}
+
+hr {
+  border-color: #333300 -moz-use-text-color #333300;
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #ccc;
+  margin: 1em 0; padding: 0;
+}
+
+.img-responsive {
+  max-width: 140px;
+  max-height: 140px;
+}
+
+ul.list-unstyled > ul.list-inline {
+  list-style-type: none;
+}
+
+.pagination {
+  text-align: center;
+}
+
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}
