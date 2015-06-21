@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-md-offset-2 col-md-2">
         <div class="row">
-          <a href="#/user-info">{{ tweet.user_id }}</a>
+          <a href="#/user-info/{{ tweet.user_id }}">{{ tweet.username }}</a>
         </div>
         <div class="col-md-12">
           <p>{{ tweet.created }}</p>
@@ -12,7 +12,7 @@
       <div class="col-md-6">
         <div class="row tweet">
           <p>{{ tweet.data }}</p>
-          <ul class="list-inline">{ tweet.image }</ul>
+          <ul class="list-inline"><!-- tweet.image --></ul>
         </div>
       </div>
     </div>

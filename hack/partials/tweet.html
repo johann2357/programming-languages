@@ -1,12 +1,12 @@
 <h2 class="form-sign-heading">Tweet</h2>
 <p class="help-block show" id="info"></p>
-<form class="form-sign tarea"
-      action="/api/tweet/", method="post">
+<form class="form-sign tarea">
   <textarea class="form-control" cols="40" id="id_data"
+            ng-model="userTweet.data"
             maxlength="140" name="data"
             placeholder="Write your tweet here..."
             required="true" rows="3"></textarea>
-  <button class="btn btn-lg btn-primary btn-block" type="submit">
+  <button class="btn btn-lg btn-primary btn-block" ng-click="tweet()">
       Tweet
   </button>
 </form>

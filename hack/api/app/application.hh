@@ -7,8 +7,11 @@ require_once 'controllers.hh';
 
 class TwitterApi extends RestApi
 {
+
+  use TwitterAuthUtils;
   use TwitterUserController;
   use TwitterTweetController;
+  use TwitterFeedController;
 
   protected $models = array(
     'User'=>null,
@@ -19,10 +22,6 @@ class TwitterApi extends RestApi
     parent::__construct($request);
     $this->models['User'] = new TwitterUserModel();
     $this->models['Tweet'] = new TwitterTweetModel();
-  }
-
-  protected function getMethod() {
-    return $this->method;
   }
 
   protected function getModel($model) {

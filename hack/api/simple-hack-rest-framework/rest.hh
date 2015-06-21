@@ -105,4 +105,28 @@ abstract class RestApi {
         );
     return ($status[$code])?$status[$code]:$status[500];
   }
+
+  protected function getMethod() {
+    return $this->method;
+  }
+
+  protected function getRequest() {
+    return $this->request;
+  }
+
+  protected function getVerb() {
+    return $this->verb;
+  }
+
+  protected function hasVerb() {
+    return ! empty($this->verb);
+  }
+
+  protected function getArgs() {
+    return $this->args;
+  }
+
+  protected function hasArgs() {
+    return ! empty($this->args);
+  }
 }

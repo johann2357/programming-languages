@@ -12,11 +12,17 @@ abstract class Model {
     $this->db = new Db();
   }
 
-  public function select($args, $kwargs=array()) {
+  public function getTableName() {
+    return $this->table_name;
+  }
+
+  private function _select_query($args, $kwargs=array()) {
     $fields = '';
     foreach ($args as $field) {
       if (in_array($field, $this->table_fields)) {
-        $fields .= "`$field`,";
+        $fields .= "`$this->table_name`.`$field`,";
+      } else {
+        $fields .= "$field,";
       }
     }
     $fields = rtrim($fields, ",");
@@ -33,7 +39,19 @@ abstract class Model {
       }
       $query .= $query_conditions;
     }
-    return $this->db->select($query);
+    return $query;
+  }
+
+  public function select($args, $kwargs=array()) {
+    return $this->db->select(
+      $this->_select_query($args, $kwargs)
+    );
+  }
+
+  public function get($args, $kwargs=array()) {
+    return $this->db->get(
+      $this->_select_query($args, $kwargs)
+    );
   }
 
   public function insert($args) {
@@ -57,7 +75,6 @@ abstract class Model {
     }
     $values = rtrim($values, ",");
     $query = "INSERT INTO `$this->table_name` ($columns) VALUES $values" ;
-    echo "$query";
     return $this->db->query($query);
   }
 }

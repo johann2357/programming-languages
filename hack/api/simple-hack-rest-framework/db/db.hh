@@ -40,6 +40,10 @@ class Db {
     return $rows;
   }
 
+  public function get($query) {
+    return array_shift($this->select($query));
+  }
+
   public function error() {
     $connection = $this->connect();
     return $connection->error;
