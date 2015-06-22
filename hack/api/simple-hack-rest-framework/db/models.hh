@@ -4,8 +4,8 @@ require_once 'db.hh';
 
 abstract class Model {
 
-  protected $table_name = '';
-  protected $table_fields = array();
+  protected string $table_name = '';
+  protected array<string> $table_fields = array();
   private $db;
 
   public function __construct() {

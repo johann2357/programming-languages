@@ -22,13 +22,13 @@ class Db {
     return self::$connection;
   }
 
-  public function query($query) {
+  public function query(string $query) {
     $connection = $this->connect();
     $result = $connection->query($query);
     return $result;
   }
 
-  public function select($query) {
+  public function select(string $query) {
     $rows = array();
     $result = $this->query($query);
     if($result === false) {
@@ -40,7 +40,7 @@ class Db {
     return $rows;
   }
 
-  public function get($query) {
+  public function get(string $query) {
     return array_shift($this->select($query));
   }
 
@@ -49,7 +49,7 @@ class Db {
     return $connection->error;
   }
 
-  public function quote($value) {
+  public function quote(string $value) {
     $connection = $this->connect();
     return "'" . $connection->real_escape_string($value) . "'";
   }

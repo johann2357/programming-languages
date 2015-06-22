@@ -3,23 +3,23 @@ abstract class RestApi {
   /**
    * GET, POST, PUT or DELETE
    */
-  protected $method = '';
+  protected string $method = '';
   /**
    * /<endpoint>
    *
    */
-  protected $endpoint = '';
+  protected string $endpoint = '';
   /**
    * /<endpoint>/<verb>
    *
    */
-  protected $verb = '';
+  protected string $verb = '';
   /**
    * /<endpoint>/<verb>/<arg0>/<arg1>
    * /<endpoint>/<arg0>
    *
    */
-  protected $args = Array();
+  protected array<string> $args = Array();
   /**
    * Stores the input of the PUT request
    */
@@ -106,7 +106,7 @@ abstract class RestApi {
     return ($status[$code])?$status[$code]:$status[500];
   }
 
-  protected function getMethod() {
+  protected function getMethod() : string {
     return $this->method;
   }
 
@@ -114,19 +114,19 @@ abstract class RestApi {
     return $this->request;
   }
 
-  protected function getVerb() {
+  protected function getVerb() : string {
     return $this->verb;
   }
 
-  protected function hasVerb() {
+  protected function hasVerb() : bool {
     return ! empty($this->verb);
   }
 
-  protected function getArgs() {
+  protected function getArgs() : array<string> {
     return $this->args;
   }
 
-  protected function hasArgs() {
+  protected function hasArgs() : bool{
     return ! empty($this->args);
   }
 }
